@@ -30,3 +30,5 @@ fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+
+console.log('myheaders', myheaders);

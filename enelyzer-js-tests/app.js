@@ -14,7 +14,28 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-idp.enprove.be/auth/realms/Enprove/protocol/openid-connect/token", requestOptions)
-  .then(response => response.json()) // Parse the response as JSON
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+fetch('https://staging-idp.enprove.be/auth/realms/Enprove/protocol/openid-connect/token', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer ' + jwtToken // include a previously obtained JWT token in the Authorization header
+  }
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Failed to get access token');
+  }
+  return response.json(); // parse the response as JSON
+})
+.then(data => {
+  const accessToken = data.accessToken; // extract the access token from the response JSON
+  // use the access token for subsequent requests
+})
+.catch(error => {
+  console.error(error);
+});
+
+
+
+
+
+
