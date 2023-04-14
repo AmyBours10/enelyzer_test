@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Interpreter 1.2.2 &copy; CMM</title>
+	<!-- Based on HTML-4 Code, so html styles -->
+</head>
+
+<body bgcolor="#CCCCCC">
+		<h3 align="center">JavaScript Interpreter 1.2.2</h3>
+		<form name="testform" id="testform" action="#">
+			
+			<table border="3" cellspacing="2" cellpadding="1" align="center" >
+				<tr>
+					<td height="40" colspan="2" align="center">
+						<input type="button" name="CSE" id="CSE" onclick="evaluateCLR();" value="Clearscreen &amp; Evaluate" /> -
+						<input type="button" name="E" id="E" onclick="evaluatetxt();" value="Evaluate" /> -
+						<input type="button" name="CS" id="CS" onclick="clearoutput();" value="Clear Output" /> -
+						<input type="button" name="rel" id="rel" onclick="window.location.reload();" value="Reset All" />
+					</td>
+				</tr>
+				<tr>
+					<td width="50%" align="center">
+						<strong>JavaScript Console Window</strong><br>
+						Type your JavaScript functions and statements in this area.<br>
+				  </td>
+					<td width="50%" align="center">
+						<strong>JavaScript Output Window</strong><br>
+						Use the output(expression) function for output in this area.<br>
+				  </td>
+				</tr>
+				<tr>
+					<td width="50%" align="center">
+						<textarea name="consoletext" id="consoletext" wrap="off" rows="25" cols="60"></textarea>
+				  </td>
+					<td width="50%" align="center">
+					<textarea name="outputtext" id="outputtext" wrap="off" rows="25" cols="60"></textarea>
+				  </td>
+				</tr>
+			</table>
+		</form>
+<script>
+window.onerror=myOnErrorHandler; // verwijs bij een fout naar on error handler
+
+function myOnErrorHandler(message, url, lineNumber) {
+	alert(message);
+	return true;
+	// laat de fout zien in een alert-box, alleen het bericht is hier van belang
+}
+		
+function output(source) {
+	// source is een tempvar die de gewenste uitvoer bevat
+	document.testform.outputtext.value += source;
+	// document.testform.outputtext.value = document.testform.outputtext.value + "-> "+source;
+	linef();
+	// deze handler stuurt gegevens als uitvoer naar de output text-area
+}
+		
+function linef() {
+	// ook een custom function
+	document.testform.outputtext.value += "\n";
+	// deze handler geeft een extra linfeed in de de output text-area
+}
+			
+function evaluatetxt() {
+	output(" ***** Console result ***** ");
+	string = document.testform.consoletext.value + ";";
+	result = eval (string);
+	// deze handler formateert de visuele uitvoer
+	// plakt de invoer string en puntkomma aaneen tot een string
+	// en voert deze uit als een javascript (evalueert)
+}
+
+function evaluateCLR() {
+	clearoutput();
+	evaluatetxt();
+	// combinatie van twee handlers, wis scherm en evalueer de invoer
+}
+
+function clearoutput() {
+	document.testform.outputtext.value = "";
+	// deze wist de uitvoer text-area
+}
+
+</script>
+	</body>
+</html>
+
