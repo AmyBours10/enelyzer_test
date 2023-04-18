@@ -1,6 +1,8 @@
 
 var idpurl = "https://staging-gateway.enprove.be";
+var apiurl = "https://staging-gateway.enprove.be";
 var orgid = "00e28801-3fd2-4841-98cc-9bdcef094774";
+var facid = "1aab41af-e2a0-44dd-9715-b884d0c23e7f"
 //create fac
 var myHeaders = new Headers();
 myHeaders.append("Authorization", `Bearer ${accessToken}`);
@@ -68,12 +70,12 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("${idpurl}/v1/organisations/${orgid}/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
-  /*
+  
 //update facility owner
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -91,7 +93,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -110,7 +112,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/info", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}/info", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -133,7 +135,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/address", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}/address", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -152,7 +154,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://localhost:9000/v1/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/building", requestOptions)
+fetch("${apiurl}/v1/facilities/${facid}/building", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -171,7 +173,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://localhost:9000/v1/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/building", requestOptions)
+fetch("${apiurl}/v1/facilities/${facid}/building", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
@@ -192,13 +194,15 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://localhost:9000/v1/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/geo", requestOptions)
+fetch("${apiurl}/v1/facilities/${facid}/geo", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+
+
 //add image map to fac
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhY0FpVFZnRTFYa0RPWlRJLVZZUFZWdE9xbzlqcWtTOEFmZklMWGJXSjhnIn0.eyJleHAiOjE2ODE3MzcwNDEsImlhdCI6MTY4MTcxOTA0MSwianRpIjoiYjU2NTIzYzgtNGM2Yy00M2Q5LThkNTMtYmM5NDQxYmJiODE5IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWlkcC5lbnByb3ZlLmJlL2F1dGgvcmVhbG1zL0VucHJvdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGY4NjliZGEtMGEyOS00ZGVmLWE0ODgtYjI4ZmZmOGU1ZTA4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW5lbHl6ZXItd2ViYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjA3ZGU4MGUwLTY3MjgtNDFmMS04MDJmLTY3YjUzOTY1Yjg3MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zdGFnaW5nLWVuZWx5emVyLmVucHJvdmUuYmUiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwczovL3N0YWdpbmctYWN0aW9ucy5lbnByb3ZlLmJlIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lbnByb3ZlIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiMDdkZTgwZTAtNjcyOC00MWYxLTgwMmYtNjdiNTM5NjViODcxIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9obiBkb2UiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI4MDgzNTA2My04MjM4LTRjM2EtODA5MC0wZjE4NGQ1NjY4ZDAiLCJnaXZlbl9uYW1lIjoiam9obiIsImZhbWlseV9uYW1lIjoiZG9lIiwiZW1haWwiOiJqb2huLmRvZUBlbnByb3ZlLmJlIn0.gC79VUq0GV2FJIB4-6iZJDLcB2bPKePoqqTxOYj-7IQ1ZgWfF3tlBGk1h74kG48Ufyc36R2qNA1WlL6VwMNdG3U938M3g94KTi6mtfHpPwsZqfElptLNxN8lUXtqFLqaFeT0vaH7-kUp3LSaKvcHqvsk9HmCPL7V062TVDR_SrH8GdL8GSHJ3wmfIUC9G0rrNQXU3KZK3JBkRaWcLdbd5VQkR6NQrwafdLlSkzI8KnHBI-gweMxoHR-ly1AjZZ4ZzedJ9vSypII_-cNBoHsk0491r7Htm-_34yTosLNJ1uUovwAGuIWym4KKbw19iIRQN44pEpIb2I1x1wLT_jq2xw");
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
 myHeaders.append("Content-Type", "application/json");
 
 var raw = JSON.stringify({
@@ -216,10 +220,12 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/images", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}/images", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+
+
 //update image map to fac
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -251,23 +257,29 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/images/:image-map-id", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}/images/:image-map-id", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+
+
+
+
 //remove inmage map from fac
 var requestOptions = {
     method: 'DELETE',
     redirect: 'follow'
   };
   
-  fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/images/:image-map-id", requestOptions)
+  fetch("${idpurl}/v1/organisations/${orgid}facilities/${facid}/images/:image-map-id", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
+
+
 //get facilities
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhY0FpVFZnRTFYa0RPWlRJLVZZUFZWdE9xbzlqcWtTOEFmZklMWGJXSjhnIn0.eyJleHAiOjE2ODE3MzcwNDEsImlhdCI6MTY4MTcxOTA0MSwianRpIjoiYjU2NTIzYzgtNGM2Yy00M2Q5LThkNTMtYmM5NDQxYmJiODE5IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWlkcC5lbnByb3ZlLmJlL2F1dGgvcmVhbG1zL0VucHJvdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGY4NjliZGEtMGEyOS00ZGVmLWE0ODgtYjI4ZmZmOGU1ZTA4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW5lbHl6ZXItd2ViYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjA3ZGU4MGUwLTY3MjgtNDFmMS04MDJmLTY3YjUzOTY1Yjg3MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zdGFnaW5nLWVuZWx5emVyLmVucHJvdmUuYmUiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwczovL3N0YWdpbmctYWN0aW9ucy5lbnByb3ZlLmJlIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lbnByb3ZlIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiMDdkZTgwZTAtNjcyOC00MWYxLTgwMmYtNjdiNTM5NjViODcxIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9obiBkb2UiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI4MDgzNTA2My04MjM4LTRjM2EtODA5MC0wZjE4NGQ1NjY4ZDAiLCJnaXZlbl9uYW1lIjoiam9obiIsImZhbWlseV9uYW1lIjoiZG9lIiwiZW1haWwiOiJqb2huLmRvZUBlbnByb3ZlLmJlIn0.gC79VUq0GV2FJIB4-6iZJDLcB2bPKePoqqTxOYj-7IQ1ZgWfF3tlBGk1h74kG48Ufyc36R2qNA1WlL6VwMNdG3U938M3g94KTi6mtfHpPwsZqfElptLNxN8lUXtqFLqaFeT0vaH7-kUp3LSaKvcHqvsk9HmCPL7V062TVDR_SrH8GdL8GSHJ3wmfIUC9G0rrNQXU3KZK3JBkRaWcLdbd5VQkR6NQrwafdLlSkzI8KnHBI-gweMxoHR-ly1AjZZ4ZzedJ9vSypII_-cNBoHsk0491r7Htm-_34yTosLNJ1uUovwAGuIWym4KKbw19iIRQN44pEpIb2I1x1wLT_jq2xw");
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
 
 var requestOptions = {
   method: 'GET',
@@ -275,13 +287,15 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+
+
 //get facility
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhY0FpVFZnRTFYa0RPWlRJLVZZUFZWdE9xbzlqcWtTOEFmZklMWGJXSjhnIn0.eyJleHAiOjE2ODE3MzcwNDEsImlhdCI6MTY4MTcxOTA0MSwianRpIjoiYjU2NTIzYzgtNGM2Yy00M2Q5LThkNTMtYmM5NDQxYmJiODE5IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWlkcC5lbnByb3ZlLmJlL2F1dGgvcmVhbG1zL0VucHJvdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGY4NjliZGEtMGEyOS00ZGVmLWE0ODgtYjI4ZmZmOGU1ZTA4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW5lbHl6ZXItd2ViYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjA3ZGU4MGUwLTY3MjgtNDFmMS04MDJmLTY3YjUzOTY1Yjg3MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zdGFnaW5nLWVuZWx5emVyLmVucHJvdmUuYmUiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwczovL3N0YWdpbmctYWN0aW9ucy5lbnByb3ZlLmJlIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lbnByb3ZlIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiMDdkZTgwZTAtNjcyOC00MWYxLTgwMmYtNjdiNTM5NjViODcxIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9obiBkb2UiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI4MDgzNTA2My04MjM4LTRjM2EtODA5MC0wZjE4NGQ1NjY4ZDAiLCJnaXZlbl9uYW1lIjoiam9obiIsImZhbWlseV9uYW1lIjoiZG9lIiwiZW1haWwiOiJqb2huLmRvZUBlbnByb3ZlLmJlIn0.gC79VUq0GV2FJIB4-6iZJDLcB2bPKePoqqTxOYj-7IQ1ZgWfF3tlBGk1h74kG48Ufyc36R2qNA1WlL6VwMNdG3U938M3g94KTi6mtfHpPwsZqfElptLNxN8lUXtqFLqaFeT0vaH7-kUp3LSaKvcHqvsk9HmCPL7V062TVDR_SrH8GdL8GSHJ3wmfIUC9G0rrNQXU3KZK3JBkRaWcLdbd5VQkR6NQrwafdLlSkzI8KnHBI-gweMxoHR-ly1AjZZ4ZzedJ9vSypII_-cNBoHsk0491r7Htm-_34yTosLNJ1uUovwAGuIWym4KKbw19iIRQN44pEpIb2I1x1wLT_jq2xw");
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
 
 var requestOptions = {
   method: 'GET',
@@ -289,23 +303,27 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
+
+
 //disable facility
 var requestOptions = {
     method: 'DELETE',
     redirect: 'follow'
   };
   
-  fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f", requestOptions)
+  fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
+
+
 //enable facility
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhY0FpVFZnRTFYa0RPWlRJLVZZUFZWdE9xbzlqcWtTOEFmZklMWGJXSjhnIn0.eyJleHAiOjE2ODE3MzcwNDEsImlhdCI6MTY4MTcxOTA0MSwianRpIjoiYjU2NTIzYzgtNGM2Yy00M2Q5LThkNTMtYmM5NDQxYmJiODE5IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWlkcC5lbnByb3ZlLmJlL2F1dGgvcmVhbG1zL0VucHJvdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGY4NjliZGEtMGEyOS00ZGVmLWE0ODgtYjI4ZmZmOGU1ZTA4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW5lbHl6ZXItd2ViYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjA3ZGU4MGUwLTY3MjgtNDFmMS04MDJmLTY3YjUzOTY1Yjg3MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zdGFnaW5nLWVuZWx5emVyLmVucHJvdmUuYmUiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwczovL3N0YWdpbmctYWN0aW9ucy5lbnByb3ZlLmJlIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lbnByb3ZlIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiMDdkZTgwZTAtNjcyOC00MWYxLTgwMmYtNjdiNTM5NjViODcxIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9obiBkb2UiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI4MDgzNTA2My04MjM4LTRjM2EtODA5MC0wZjE4NGQ1NjY4ZDAiLCJnaXZlbl9uYW1lIjoiam9obiIsImZhbWlseV9uYW1lIjoiZG9lIiwiZW1haWwiOiJqb2huLmRvZUBlbnByb3ZlLmJlIn0.gC79VUq0GV2FJIB4-6iZJDLcB2bPKePoqqTxOYj-7IQ1ZgWfF3tlBGk1h74kG48Ufyc36R2qNA1WlL6VwMNdG3U938M3g94KTi6mtfHpPwsZqfElptLNxN8lUXtqFLqaFeT0vaH7-kUp3LSaKvcHqvsk9HmCPL7V062TVDR_SrH8GdL8GSHJ3wmfIUC9G0rrNQXU3KZK3JBkRaWcLdbd5VQkR6NQrwafdLlSkzI8KnHBI-gweMxoHR-ly1AjZZ4ZzedJ9vSypII_-cNBoHsk0491r7Htm-_34yTosLNJ1uUovwAGuIWym4KKbw19iIRQN44pEpIb2I1x1wLT_jq2xw");
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
 myHeaders.append("Content-Type", "application/json");
 
 var raw = JSON.stringify({
@@ -332,7 +350,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f/enable", requestOptions)
+fetch("${idpurl}/v1/organisations/${orgid}/facilities/${facid}/enable", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
-  .catch(error => console.log('error', error));*/
+  .catch(error => console.log('error', error));
