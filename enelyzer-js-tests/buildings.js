@@ -1,34 +1,248 @@
+
+var idpurl = "https://staging-gateway.enprove.be";
+var apiurl = "https://staging-gateway.enprove.be";
+var gatewayurl = "https://staging-gateway.enprove.be";
+var buildingid = "e4a3606f-2c25-48ab-8bd7-c600757f9ea5";
 var orgid = "00e28801-3fd2-4841-98cc-9bdcef094774";
 
+//create building
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhY0FpVFZnRTFYa0RPWlRJLVZZUFZWdE9xbzlqcWtTOEFmZklMWGJXSjhnIn0.eyJleHAiOjE2ODE0ODEwODQsImlhdCI6MTY4MTQ2MzA4NCwianRpIjoiYTdjYjdhMDQtOWQ1OS00YzliLWJkZWMtZmI2ZjliNzQ1MDM0IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWlkcC5lbnByb3ZlLmJlL2F1dGgvcmVhbG1zL0VucHJvdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGY4NjliZGEtMGEyOS00ZGVmLWE0ODgtYjI4ZmZmOGU1ZTA4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW5lbHl6ZXItd2ViYXBwIiwic2Vzc2lvbl9zdGF0ZSI6Ijg5YjEwNGU2LTU0ZjEtNDdiYy05NzIyLTY4MjJjNmVhNjJkNSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zdGFnaW5nLWVuZWx5emVyLmVucHJvdmUuYmUiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwczovL3N0YWdpbmctYWN0aW9ucy5lbnByb3ZlLmJlIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lbnByb3ZlIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiODliMTA0ZTYtNTRmMS00N2JjLTk3MjItNjgyMmM2ZWE2MmQ1IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9obiBkb2UiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI4MDgzNTA2My04MjM4LTRjM2EtODA5MC0wZjE4NGQ1NjY4ZDAiLCJnaXZlbl9uYW1lIjoiam9obiIsImZhbWlseV9uYW1lIjoiZG9lIiwiZW1haWwiOiJqb2huLmRvZUBlbnByb3ZlLmJlIn0.mRtgnOpViROV37ms1PEMFG8VKnbhngelg3EhxFB1FxuJDKHfBvoqf_RftdLjd5eGtmGfxT5OA3Y4xbjoEJL_C5ZLbQVm67R2fG7vktT4UbccbWccdACIpu6l0VbiyqRKXAnvoo97Xf0ZrR-brLeoXpIHpL03w2myxirRiN-Nm8dOBGaGKFzJRKcE-4t-sNor4c8LOyqjwpswfcb58NMGzQTn_I9SiMwRq-xaqlmjotMEI60JX67DpbqxkjIE8axkM6X8K_oUQjo3a_ApcTH8f7mtF6kVi5gurvQ8jvPIx_FgIuC6-06kw1MzXakfpBuSvP1_K-2Gx8wX0ufAXSU_9A");
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "name": "Trust1Teamate",
+  "friendlyName": "Trust1Team 3",
+  "buildingType": "OFFICE",
+  "facilityId": "1aab41af-e2a0-44dd-9715-b884d0c23e7f",
+  "address": {
+    "addressLine1": "Nieuwebosstraat 5",
+    "postalCode": "9000",
+    "country": "Belgium",
+    "city": "Brussels"
+  }
+});
 
 var requestOptions = {
-  method: 'GET',
+  method: 'POST',
   headers: myHeaders,
+  body: raw,
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/orgisd/facilities", requestOptions)
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings", requestOptions, gatewayurl, orgid)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
-console.log(fetch);
 
-
+// update building
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhY0FpVFZnRTFYa0RPWlRJLVZZUFZWdE9xbzlqcWtTOEFmZklMWGJXSjhnIn0.eyJleHAiOjE2ODE0ODEwODQsImlhdCI6MTY4MTQ2MzA4NCwianRpIjoiYTdjYjdhMDQtOWQ1OS00YzliLWJkZWMtZmI2ZjliNzQ1MDM0IiwiaXNzIjoiaHR0cHM6Ly9zdGFnaW5nLWlkcC5lbnByb3ZlLmJlL2F1dGgvcmVhbG1zL0VucHJvdmUiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiNGY4NjliZGEtMGEyOS00ZGVmLWE0ODgtYjI4ZmZmOGU1ZTA4IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW5lbHl6ZXItd2ViYXBwIiwic2Vzc2lvbl9zdGF0ZSI6Ijg5YjEwNGU2LTU0ZjEtNDdiYy05NzIyLTY4MjJjNmVhNjJkNSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9zdGFnaW5nLWVuZWx5emVyLmVucHJvdmUuYmUiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwczovL3N0YWdpbmctYWN0aW9ucy5lbnByb3ZlLmJlIiwiaHR0cDovL2xvY2FsaG9zdDozMDAwIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1lbnByb3ZlIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiODliMTA0ZTYtNTRmMS00N2JjLTk3MjItNjgyMmM2ZWE2MmQ1IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9obiBkb2UiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiI4MDgzNTA2My04MjM4LTRjM2EtODA5MC0wZjE4NGQ1NjY4ZDAiLCJnaXZlbl9uYW1lIjoiam9obiIsImZhbWlseV9uYW1lIjoiZG9lIiwiZW1haWwiOiJqb2huLmRvZUBlbnByb3ZlLmJlIn0.mRtgnOpViROV37ms1PEMFG8VKnbhngelg3EhxFB1FxuJDKHfBvoqf_RftdLjd5eGtmGfxT5OA3Y4xbjoEJL_C5ZLbQVm67R2fG7vktT4UbccbWccdACIpu6l0VbiyqRKXAnvoo97Xf0ZrR-brLeoXpIHpL03w2myxirRiN-Nm8dOBGaGKFzJRKcE-4t-sNor4c8LOyqjwpswfcb58NMGzQTn_I9SiMwRq-xaqlmjotMEI60JX67DpbqxkjIE8axkM6X8K_oUQjo3a_ApcTH8f7mtF6kVi5gurvQ8jvPIx_FgIuC6-06kw1MzXakfpBuSvP1_K-2Gx8wX0ufAXSU_9A");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "name": "Trust1Team Old Offices 45",
+  "friendlyName": "Trust1Team 3",
+  "buildingType": "OFFICE",
+  "floors": 4
+});
 
 var requestOptions = {
-  method: 'GET',
+  method: 'PUT',
   headers: myHeaders,
+  body: raw,
   redirect: 'follow'
 };
 
-fetch("https://staging-gateway.enprove.be/v1/organisations/00e28801-3fd2-4841-98cc-9bdcef094774/facilities/1aab41af-e2a0-44dd-9715-b884d0c23e7f", requestOptions)
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}", requestOptions, gatewayurl, orgid, buildingid)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 
-console.log('myheaders', myheaders);
+  //update building owner
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  var raw = JSON.stringify({
+    "name": "Michallis test user",
+    "rental": false
+  });
+  
+  var requestOptions = {
+    method: 'PUT',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  
+  fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}/owner", requestOptions, gatewayurl, orgid, buildingid)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+    // update building info
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "info": "Very hot in the summer time"
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}/info", requestOptions, gatewayurl, orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+//update building technical info
+
+var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "surface": 1,
+  "volume": 2,
+  "peopleCount": 3,
+  "quotity": 4,
+  "percentage": 0.5
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}/technical-info", requestOptions, gatewayurl, orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+  //update building address
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "addressLine1": "nieuwebosstraat 10",
+  "postalCode": "9000",
+  "city": "Ghent",
+  "countryCode": "BE"
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/buildings/${buildingid}/organisations/${orgid}/address", requestOptions, gatewayurl, buildingid, orgid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+  // add building to facility
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "buildingId": "coachhouse"
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/buildings/${buildingid}/building", requestOptions, gatewayurl, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+  //remove building from facility
+
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "buildingId": "coachhouse"
+});
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${idpurl}/v1/buildings/${buildingid}/building", requestOptions, idpurl, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+  //update image map 
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "position": 2,
+  "labels": [
+    {
+      "assetType": "MACHINE_GROUP",
+      "assetId": "a88fce14-7876-48a8-8d2b-e141c954e352",
+      "label": "test",
+      "coordinates": {
+        "x": 22,
+        "y": 4
+      }
+    }
+  ],
+  "image": {
+    "name": "coachhouse",
+    "uri": "https://storage.googleapis.com/enelyzer-staging-images/images/floor-plan.png",
+    "imageType": "CUSTOM"
+  }
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/facilities/{facilityid}/images/:image-map-id", requestOptions, gatewayurl, orgid, facilityId)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
+// update geolocation
+
+// add image map to building
+
+//remove image map from building
+
+//get buildings
+
+//get building
+
+//remove building
+
+//restore building
+
+//update photo
+
+//import buildings
