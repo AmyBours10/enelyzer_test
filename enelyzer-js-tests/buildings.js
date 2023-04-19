@@ -230,19 +230,161 @@ fetch("${gatewayurl}/v1/organisations/${orgid}/facilities/{facilityid}/images/:i
   .catch(error => console.log('error', error));
 
 // update geolocation
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "lat": 51.0491128,
+  "lng": 3.7359751,
+  "zoom": 4
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewaturl}/v1/buildings/${buildingid}/organisations/${orgid}/geo", requestOptions, gatewayurl, buildingid, orgid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 
 // add image map to building
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "position": 0,
+  "floor": 4,
+  "coordinates": [
+    {
+      "x": 0,
+      "y": 0,
+      "width": 10,
+      "height": 10
+    }
+  ],
+  "image": {
+    "name": "coachhouse",
+    "uri": "https://storage.googleapis.com/enelyzer-staging-images/images/floor-plan.png",
+    "imageType": "CUSTOM"
+  }
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}/images", requestOptions, gatewayurl, orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 
 //remove image map from building
+var requestOptions = {
+  method: 'DELETE',
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/buildings/${buildingid}/organisations/${orgid}/images/:image-map-id", requestOptions, gatewayurl, buildingid, orgid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
 //get buildings
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings", requestOptions, gatewayurl, orgid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 
 //get building
+var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}", requestOptions, gatewayurl, orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+
 
 //remove building
+var requestOptions = {
+  method: 'DELETE',
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}", requestOptions, gatewayurl, orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
 //restore building
+var requestOptions = {
+  method: 'POST',
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}/enable", requestOptions, gatewayurl, orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
 //update photo
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "name": "Building photo",
+  "uri": "https://storage.googleapis.com/enelyzer-staging-images/images/00e28801-3fd2-4841-98cc-9bdcef094774/c412084d-d9a5-4765-b866-e55f4faeea80/986s1tz5.svg",
+  "imageType": "CUSTOM"
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("${gatewayurl}/v1/organisations/${orgid}/buildings/${buildingid}/image", requestOptions, gatewayurl,orgid, buildingid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
 //import buildings
+var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${accessToken}`);
+
+var formdata = new FormData();
+formdata.append("file", fileInput.files[0], "building_sample.csv");
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata,
+  redirect: 'follow'
+};
+
+fetch("{${gatewayurl}/v1/organisations/${orgid}/buildings/import/new", requestOptions, gatewayurl, orgid)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
