@@ -1,7 +1,6 @@
 var idpurl = "https://staging-gateway.enprove.be";
 var apiurl = "https://staging-gateway.enprove.be";
 var gatewayurl = "https://staging-gateway.enprove.be";
-var buildingid = "e4a3606f-2c25-48ab-8bd7-c600757f9ea5";
 var orgid = "00e28801-3fd2-4841-98cc-9bdcef094774";
 var machineid = "ba6353ab-7fc5-4860-8867-6e33446c3b9b"
 
