@@ -2,7 +2,6 @@ var idpurl = "https://staging-gateway.enprove.be";
 var apiurl = "https://staging-gateway.enprove.be";
 var gatewayurl = "https://staging-gateway.enprove.be";
 var orgid = "00e28801-3fd2-4841-98cc-9bdcef094774";
-var maintenancedoc = "b3a5951e-c1c9-4367-ab72-41a72071bf98";
 
 //create role
 var myHeaders = new Headers();
