@@ -1,9 +1,5 @@
-const IoPort = require("tailwind/dist/IoPort");
-
 var idpurl = "https://staging-gateway.enprove.be";
-var apiurl = "https://staging-gateway.enprove.be";
-var gatewayurl = "https://staging-gateway.enprove.be";
-var orgid = "00e28801-3fd2-4841-98cc-9bdcef094774";
+
 
 // post meter reading webhook
 var formdata = new FormData();
